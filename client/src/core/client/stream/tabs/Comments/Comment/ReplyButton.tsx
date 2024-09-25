@@ -17,35 +17,40 @@ interface Props {
   className?: string;
 }
 
-const ReplyButton: FunctionComponent<Props> = (props) => (
-  <Localized
-    id="comments-replyButton"
-    attrs={{ "aria-label": true }}
-    vars={{ username: props.author ?? "" }}
-  >
-    <Button
-      className={props.className}
-      id={props.id}
-      onClick={props.onClick}
-      disabled={props.disabled}
-      data-testid="comment-reply-button"
-      active={props.active}
-      variant="flat"
-      color="secondary"
-      fontSize="small"
-      fontWeight="semiBold"
-      paddingSize="extraSmall"
-    >
-      <Flex alignItems="center" container="span">
-        <SvgIcon className={styles.icon} Icon={EmailActionReplyIcon} />
-        <Responsive minWidth={400}>
-          <Localized id="comments-replyButton-reply">
-            <span>Reply</span>
-          </Localized>
-        </Responsive>
-      </Flex>
-    </Button>
-  </Localized>
-);
+const ReplyButton: FunctionComponent<Props> = (props) => {
+  if (props.disabled) {
+    return null;
+  }
 
+  return (
+    <Localized
+      id="comments-replyButton"
+      attrs={{ "aria-label": true }}
+      vars={{ username: props.author ?? "" }}
+    >
+      <Button
+        className={props.className}
+        id={props.id}
+        onClick={props.onClick}
+        disabled={props.disabled}
+        data-testid="comment-reply-button"
+        active={props.active}
+        variant="flat"
+        color="secondary"
+        fontSize="small"
+        fontWeight="semiBold"
+        paddingSize="extraSmall"
+      >
+        <Flex alignItems="center" container="span">
+          <SvgIcon className={styles.icon} Icon={EmailActionReplyIcon} />
+          <Responsive minWidth={400}>
+            <Localized id="comments-replyButton-reply">
+              <span>Reply</span>
+            </Localized>
+          </Responsive>
+        </Flex>
+      </Button>
+    </Localized>
+  );
+};
 export default ReplyButton;
