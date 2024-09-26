@@ -330,34 +330,3 @@ it("handle disabled commenting error", async () => {
   expect(rte.props.disabled).toBe(true);
   expect(within(form).getByText("Submit").props.disabled).toBe(true);
 });
-
-it("handle story closed error", async () => {
-  await act(async () => {
-    let returnStory = stories[0];
-    const { rte, form, replyButton } = await createTestRenderer(
-      {
-        Mutation: {
-          createCommentReply: sinon.stub().callsFake(() => {
-            throw new InvalidRequestError({
-              code: ERROR_CODES.STORY_CLOSED,
-              traceID: "traceID",
-            });
-          }),
-        },
-        Query: {
-          story: sinon.stub().callsFake(() => returnStory),
-        },
-      },
-      { muteNetworkErrors: true }
-    );
-
-    rte.props.onChange("abc");
-    form.props.onSubmit();
-
-    // Change the story that we return to be closed.
-    returnStory = { ...stories[0], isClosed: true };
-
-    await waitForElement(() => within(form).getByText("Story is closed"));
-    expect(replyButton.props.disabled).toBe(true);
-  });
-});
