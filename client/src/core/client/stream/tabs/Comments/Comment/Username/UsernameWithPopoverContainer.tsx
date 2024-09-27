@@ -1,7 +1,7 @@
 import { Localized } from "@fluent/react/compat";
+import cn from "classnames";
 import React, { FunctionComponent } from "react";
 import { graphql } from "react-relay";
-import cn from "classnames";
 
 import { withFragmentContainer } from "coral-framework/lib/relay";
 import { BaseButton, ClickOutside, Popover } from "coral-ui/components/v2";
