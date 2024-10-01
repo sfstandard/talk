@@ -1,10 +1,15 @@
 .root {
-  background-color: var(--palette-primary-100);
+  background-color: var(--palette-grey-500);
   border-radius: var(--round-corners);
-  color: var(--palette-text-500);
+  color: var(--palette-text-000);
+  font-weight: 500;
 
   padding-left: var(--spacing-4);
   padding-right: var(--spacing-4);
   padding-top: var(--spacing-3);
   padding-bottom: var(--spacing-3);
+
+  a {
+    color: var(--palette-text-000);
+  }
 }
