@@ -1,4 +1,5 @@
 import { Localized } from "@fluent/react/compat";
+import cn from "classnames";
 import React, { FunctionComponent } from "react";
 import { graphql } from "react-relay";
 
@@ -11,6 +12,8 @@ import { UsernameWithPopoverContainer_viewer } from "coral-stream/__generated__/
 
 import UserPopoverContainer from "../UserPopover";
 import Username from "./Username";
+
+import styles from "./Username.css";
 
 interface Props {
   comment: UsernameWithPopoverContainer_comment;
@@ -54,7 +57,9 @@ const UsernameWithPopoverContainer: FunctionComponent<Props> = (props) => {
               ref={ref}
               className={props.className}
             >
-              <Username className={props.usernameClassName}>
+              <Username
+                className={cn(props.usernameClassName, styles.username)}
+              >
                 {props.comment.author!.username}
               </Username>
             </BaseButton>
