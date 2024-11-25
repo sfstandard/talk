@@ -179,6 +179,12 @@ const Popup: FunctionComponent<PopupProps> = ({
       reconcileFeatures(renderWindow, opts)
     );
 
+    if (!ref.current) {
+      // eslint-disable-next-line no-console
+      console.warn("Popup blocked");
+      return;
+    }
+
     attemptSetCallbacks();
 
     ref.current!.location.href = href;
