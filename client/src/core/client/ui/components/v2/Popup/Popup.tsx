@@ -179,9 +179,15 @@ const Popup: FunctionComponent<PopupProps> = ({
       reconcileFeatures(renderWindow, opts)
     );
 
+    if (!ref.current) {
+      // eslint-disable-next-line no-console
+      console.warn("Popup blocked");
+      return;
+    }
+
     attemptSetCallbacks();
 
-    ref.current!.location.href = href;
+    ref.current.location.href = href;
   }, [renderWindow, ref, attemptSetCallbacks, href, title, reconcileFeatures]);
 
   // have to use layouteffect here so that fires synchronously and popup
