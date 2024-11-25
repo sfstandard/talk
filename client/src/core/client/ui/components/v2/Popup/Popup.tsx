@@ -187,7 +187,7 @@ const Popup: FunctionComponent<PopupProps> = ({
 
     attemptSetCallbacks();
 
-    ref.current!.location.href = href;
+    ref.current.location.href = href;
   }, [renderWindow, ref, attemptSetCallbacks, href, title, reconcileFeatures]);
 
   // have to use layouteffect here so that fires synchronously and popup
