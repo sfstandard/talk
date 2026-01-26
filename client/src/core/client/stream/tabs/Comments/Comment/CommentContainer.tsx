@@ -360,12 +360,7 @@ export const CommentContainer: FunctionComponent<Props> = ({
 
   const commentTags = (
     <>
-      {hasFeaturedTag && !isQA && (
-        <FeaturedTag
-          collapsed={collapsed}
-          topCommenterEnabled={settings.topCommenter?.enabled}
-        />
-      )}
+      {hasFeaturedTag && !isQA && <FeaturedTag />}
       {hasAnsweredTag && isQA && <AnsweredTag collapsed={collapsed} />}
     </>
   );
@@ -736,7 +731,8 @@ export const CommentContainer: FunctionComponent<Props> = ({
                           settings.disableCommenting.enabled ||
                           story.isClosed ||
                           story.isArchived ||
-                          story.isArchiving
+                          story.isArchiving ||
+                          (typeof indentLevel === "number" && indentLevel > 0)
                         }
                         className={cn(
                           styles.actionButton,

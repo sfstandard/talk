@@ -53,6 +53,9 @@ const PostCommentFormFake: FunctionComponent<Props> = ({
     [onDraftChange]
   );
   const isQA = story.settings && story.settings.mode === GQLSTORY_MODE.QA;
+
+  return null;
+
   return (
     <div id={POST_COMMENT_FORM_ID} className={CLASSES.createComment.$root}>
       {showMessageBox && (

@@ -8,6 +8,10 @@
   line-height: 1;
 }
 
+.username {
+  color: var(--palette-text-900);
+}
+
 .popover {
   width: 232px;
   max-width: 80%;

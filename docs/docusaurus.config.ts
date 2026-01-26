@@ -52,12 +52,12 @@ const config: Config = {
           label: "API",
         },
         {
-          href: "https://github.com/coralproject/talk",
+          href: "https://github.com/sfstandard/talk",
           label: "GitHub",
           position: "right",
         },
         {
-          href: "https://hub.docker.com/r/coralproject/talk/",
+          href: "https://hub.docker.com/r/sfstandard/talk/",
           label: "Docker",
           position: "right",
         },
@@ -80,7 +80,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/coralproject/talk",
+              href: "https://github.com/sfstandard/talk",
             },
           ],
         },
@@ -89,7 +89,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/coralproject/talk",
+              href: "https://github.com/sfstandard/talk",
             },
           ],
         },
@@ -101,6 +101,21 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   },
+  presets: [
+    [
+      "@docusaurus/preset-classic",
+      {
+        docs: {
+          routeBasePath: "/",
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/sfstandard/talk/edit/develop/docs/",
+        },
+        theme: {
+          customCss: require.resolve("./src/css/custom.css"),
+        },
+      },
+    ],
+  ],
   plugins: [
     [
       "@graphql-markdown/docusaurus",

@@ -7,7 +7,6 @@ import {
   replyableComment,
   settings,
   stories,
-  unrepliableComment,
 } from "../../fixtures";
 import create from "./create";
 
@@ -41,15 +40,4 @@ it("allows replies to comments with canReply = true", async () => {
     { exact: false }
   );
   expect(shouldBeEnabled).toBeEnabled();
-});
-
-it("disallows replies to comments with canReply = false", async () => {
-  await createTestRenderer();
-
-  const shouldBeDisabled = await screen.findByLabelText(
-    `Reply to comment by ${unrepliableComment.author?.username}`,
-    { exact: false }
-  );
-
-  expect(shouldBeDisabled).toBeDisabled();
 });

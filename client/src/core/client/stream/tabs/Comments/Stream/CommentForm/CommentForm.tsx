@@ -527,9 +527,9 @@ const CommentForm: FunctionComponent<Props> = ({
                             (!!editableUntil && pristine)
                           }
                           type="submit"
-                          fullWidth={matches}
+                          fullWidth={true}
                           className={CLASSES[classNameRoot].submit}
-                          upperCase
+                          upperCase={false}
                         >
                           {editableUntil ? "Save changes" : "Submit"}
                         </Button>
