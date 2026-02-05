@@ -41,6 +41,7 @@ export const Settings: GQLSettingsTypeResolver<Tenant> = {
   stories: ({ stories }) => stories,
   amp: (parent, args, ctx) => isAMPEnabled(ctx.tenant),
   flattenReplies: (parent, args, ctx) => areRepliesFlattened(ctx.tenant),
+  collapseReplies: (parent, args, ctx) => ctx.tenant.collapseReplies || false,
   forReviewQueue: (parent, args, ctx) => isForReviewQueueEnabled(ctx.tenant),
   disableDefaultFonts: ({ disableDefaultFonts }) =>
     Boolean(disableDefaultFonts),
@@ -84,9 +85,33 @@ export const Settings: GQLSettingsTypeResolver<Tenant> = {
   protectedEmailDomains: ({
     protectedEmailDomains = Array.from(PROTECTED_EMAIL_DOMAINS),
   }) => protectedEmailDomains,
-  inPageNotifications: ({
-    inPageNotifications = { enabled: true, floatingBellIndicator: true },
-  }) => inPageNotifications,
+  disposableEmailDomains: ({ disposableEmailDomains = { enabled: false } }) =>
+    disposableEmailDomains,
+  externalNotifications: (parent, args, ctx) => {
+    return { active: ctx.externalNotifications.active() };
+  },
+  inPageNotifications: (
+    {
+      inPageNotifications = {
+        enabled: true,
+        floatingBellIndicator: true,
+        active: true,
+      },
+    },
+    args,
+    ctx
+  ) => {
+    // if we have the env var set to enable in-page (internal)
+    // notifications, we are active
+    //
+    // otherwise, the default behaviour is to disable in-page
+    // if we have external notifications enabled
+    const active =
+      !!ctx.config.get("internal_notifications") ||
+      !ctx.externalNotifications.active();
+
+    return { ...inPageNotifications, active };
+  },
   showUnmoderatedCounts: ({ showUnmoderatedCounts = true }) =>
     showUnmoderatedCounts,
 };

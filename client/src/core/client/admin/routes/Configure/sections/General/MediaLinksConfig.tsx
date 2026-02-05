@@ -41,6 +41,9 @@ graphql`
       twitter {
         enabled
       }
+      bluesky {
+        enabled
+      }
       youtube {
         enabled
       }
@@ -64,10 +67,10 @@ const MediaLinksConfig: FunctionComponent<Props> = ({ disabled }) => {
       }
       container={<FieldSet />}
     >
-      <Localized id="configure-general-embedLinks-description">
+      <Localized id="configure-general-embedLinks-description-addASinglePiece">
         <FormFieldDescription>
-          Allow commenters to add a YouTube video, X post or GIF's to the end of
-          their comment
+          Allow commenters to add a single piece of embedded media to the end of
+          a comment
         </FormFieldDescription>
       </Localized>
       <FormField>
@@ -76,6 +79,26 @@ const MediaLinksConfig: FunctionComponent<Props> = ({ disabled }) => {
         </Localized>
         <OnOffField
           name="media.twitter.enabled"
+          disabled={disabled}
+          onLabel={
+            <Localized id="configure-general-embedLinks-On">
+              <span>Yes</span>
+            </Localized>
+          }
+          offLabel={
+            <Localized id="configure-general-embedLinks-Off">
+              <span>No</span>
+            </Localized>
+          }
+        />
+      </FormField>
+
+      <FormField>
+        <Localized id="configure-general-embedLinks-enableBlueskyEmbeds">
+          <Label component="legend">Allow Bluesky post embeds</Label>
+        </Localized>
+        <OnOffField
+          name="media.bluesky.enabled"
           disabled={disabled}
           onLabel={
             <Localized id="configure-general-embedLinks-On">
