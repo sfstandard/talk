@@ -98,7 +98,7 @@ jobs:
       - name: Build, Tag, Push Major Tag
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/aarch64
+          platforms: linux/aarch64
           push: true
           tags: ${{ env.IMAGE_REPOSITORY }}:${{ env.MAJOR_TAG }}
           build-args: |
@@ -108,7 +108,7 @@ jobs:
       - name: Build, Tag, Push Minor Tag
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/aarch64
+          platforms: linux/aarch64
           push: true
           tags: ${{ env.IMAGE_REPOSITORY }}:${{ env.MINOR_TAG }}
           build-args: |
@@ -118,7 +118,7 @@ jobs:
       - name: Build, Tag, Push Patch Tag
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/aarch64
+          platforms: linux/aarch64
           push: true
           tags: ${{ env.IMAGE_REPOSITORY }}:${{ env.PATCH_TAG }}
           build-args: |
