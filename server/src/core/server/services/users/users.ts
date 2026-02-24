@@ -1405,6 +1405,35 @@ export async function updateEmailByID(
 }
 
 /**
+ * updateBioByID will update a given User's bio. For use by administrators.
+ * @param mongo mongo database to interact with
+ * @param cache cache to invalidate
+ * @param tenant Tenant where the User will be interacted with
+ * @param userID the User's ID that we are updating
+ * @param bio the bio that we are setting on the User
+ */
+export async function updateBioByID(
+  mongo: MongoContext,
+  cache: DataCache,
+  tenant: Tenant,
+  userID: string,
+  bio?: string
+) {
+  if (bio && bio.length > MAX_BIO_LENGTH) {
+    throw new UserBioTooLongError(userID);
+  }
+
+  const updatedUser = await updateUserBio(mongo, tenant.id, userID, bio);
+
+  const cacheAvailable = await cache.available(tenant.id);
+  if (cacheAvailable) {
+    await cache.users.update(updatedUser);
+  }
+
+  return updatedUser;
+}
+
+/**
  * updateBio will update the given User's bio.
  * @param mongo mongo database to interact with
  * @param tenant Tenant where the User will be interacted with
