@@ -10919,6 +10919,13 @@ type Mutation {
     @auth(roles: [ADMIN])
 
   """
+  updateUserBio allows administrators to update a given User's bio
+  to the one provided.
+  """
+  updateUserBio(input: UpdateUserBioInput!): UpdateUserBioPayload!
+    @auth(roles: [ADMIN])
+
+  """
   updateUserAvatar allows administrators to update a given User's avatar to the
   one provided.
   """
@@ -11589,4 +11596,33 @@ type Subscription {
   commentEdited returns when a Comment is edited.
   """
   commentEdited(storyID: ID!): CommentEditedPayload!
+}
+
+input UpdateUserBioInput {
+  """
+  userID is the ID of the User that should have their bio updated.
+  """
+  userID: ID!
+
+  """
+  bio is the bio to set for the User.
+  """
+  bio: String!
+
+  """
+  clientMutationId is required for Relay support.
+  """
+  clientMutationId: String!
+}
+
+type UpdateUserBioPayload {
+  """
+  user is the possibly modified User.
+  """
+  user: User!
+
+  """
+  clientMutationId is required for Relay support.
+  """
+  clientMutationId: String!
 }
