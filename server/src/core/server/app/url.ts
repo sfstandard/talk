@@ -5,7 +5,14 @@ import { Tenant } from "coral-server/models/tenant";
 import { Request } from "coral-server/types/express";
 
 export function reconstructURL(req: Request, path = "/"): string {
-  const scheme = req.secure ? "https" : "http";
+  /**
+   * NOTE (milan): Since we terminate TLS at the load balancer, `req.secure`
+   *  will never be true, so we'll always get `http`, and Google will complain
+   *  about redirect URL mismatch. And we can't use `http` in Google config
+   *  anyway and why would we even want to.
+   */
+  //  const scheme = req.secure ? "https" : "http";
+  const scheme = req.get("host")?.includes("localhost") ? "http" : "https";
   const host = req.get("host");
   const base = `${scheme}://${host}`;
 
