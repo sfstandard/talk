@@ -1,6 +1,6 @@
 {
   "name": "@coralproject/talk",
-  "version": "9.11.4",
+  "version": "9.11.5",
   "author": "The Coral Project",
   "homepage": "https://coralproject.net/",
   "sideEffects": [
@@ -12,7 +12,7 @@
     "url": "git://github.com/sfstandard/talk.git"
   },
   "engines": {
-    "node": "^18.16.0",
+    "node": ">=24.22.1",
     "pnpm": "8.14.3"
   },
   "bugs": "https://github.com/sfstandard/talk/issues",
