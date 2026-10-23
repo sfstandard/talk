@@ -1,6 +1,6 @@
 {
   "name": "@coralproject/talk",
-  "version": "9.11.6",
+  "version": "9.11.7",
   "author": "The Coral Project",
   "homepage": "https://coralproject.net/",
   "sideEffects": [
@@ -86,7 +86,7 @@
     "luxon": "^1.22.2",
     "postcss": "^8.3.5",
     "querystringify": "^2.1.1",
-    "re2": "^1.20.9",
+    "re2": "^1.24.1",
     "source-map-support": "^0.5.16",
     "uuid": "^7.0.3"
   },
@@ -317,7 +317,8 @@
   "pnpm": {
     "overrides": {
       "@testing-library/dom": "9.3.4",
-      "axe-core": "3.5.5"
+      "axe-core": "3.5.5",
+      "re2": "^1.24.1"
     }
   },
   "dependencies-pins-documentation": {

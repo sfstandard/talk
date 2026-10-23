@@ -1,6 +1,6 @@
 {
   "name": "common",
-  "version": "9.11.6",
+  "version": "9.11.7",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,5 +44,10 @@
     "ts-node": "^9.1.1",
     "typescript": "^3.9.5",
     "url-regex-safe": "^2.0.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "re2": "^1.24.1"
+    }
   }
 }
