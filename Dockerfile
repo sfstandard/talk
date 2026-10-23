@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:24.22.1-trixie
 
 ENV NODE_OPTIONS="--max-old-space-size=8192 --openssl-legacy-provider --no-experimental-fetch"
 
