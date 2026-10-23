@@ -38,10 +38,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Define SHORT_SHA with commit short sha
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
-      - name: Setup Node18.x
+      - name: Setup Node 24.x
         uses: actions/setup-node@v3
         with:
-          node-version: "18.16.x"
+          node-version: "24.22.1"
       - name: Install pnpm 8
         run: npm install -g pnpm@8.14.3 --registry=https://registry.npmjs.org
       # -
@@ -62,7 +62,11 @@ jobs:
       #   with:
       #     entryPoint: ./server
       #     version: 2
+      - name: Install redis-server
+        run: sudo apt-get update && sudo apt-get install -y redis-server
       - name: pnpm ci
+        env:
+          REDISMS_DISABLE_POSTINSTALL: "1"
         run: sh scripts/pnpm-ci.sh
       - name: Generate schemas and types
         run: sh scripts/generate.sh
@@ -73,6 +77,8 @@ jobs:
           cd client
           npx @coralproject/package-version-lint
       - name: Run Server Unit Tests
+        env:
+          REDISMS_SYSTEM_BINARY: /usr/bin/redis-server
         run: cd server && pnpm run test:server -- --ci --reporters=default --reporters=jest-junit
       - name: Run Client Stream Unit Tests
         run: cd client && npm run test:client:stream -- --ci --reporters=default --reporters=jest-junit
